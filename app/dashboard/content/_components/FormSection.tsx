@@ -34,7 +34,7 @@ function FormSection({ selectedTemplate, userFormInput, loading }: PROPS) {
     if (selectedTemplate?.form?.length && firstInputRef.current) {
       firstInputRef.current.focus();
     }
-  }, [formData, selectedTemplate]);
+  }, [ selectedTemplate]);
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

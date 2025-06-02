@@ -45,7 +45,7 @@ function UsageTrack() {
       // Fetch AI usage data for the user
       const usage: HISTORY[] = await db
         .select()
-        .from(AIOutput)
+        .from(AIOutput).where(eq(AIOutput.createdBy, email));
         
 
       // Sum length of AI responses (assuming length = number of credits used)

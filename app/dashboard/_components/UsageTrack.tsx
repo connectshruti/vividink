@@ -28,17 +28,17 @@ function UsageTrack() {
   useEffect(() => {
     if (!email) return;
 
-    fetchUsageData();
-    fetchSubscriptionStatus();
+    fetchUsageData(email);
+    fetchSubscriptionStatus(email);
   }, [email]);
 
   useEffect(() => {
     if (email && updateCreditUsage) {
-      fetchUsageData();
+      fetchUsageData(email);
     }
   }, [updateCreditUsage, email]);
 
-  async function fetchUsageData() {
+  async function fetchUsageData(email:string) {
     setLoading(true);
     setError(null);
     try {
@@ -46,7 +46,7 @@ function UsageTrack() {
       const usage: HISTORY[] = await db
         .select()
         .from(AIOutput)
-        .where(eq(AIOutput.createdBy, email));
+        
 
       // Sum length of AI responses (assuming length = number of credits used)
       const total = usage.reduce((acc, entry) => acc + (entry.aiResponse?.length || 0), 0);
@@ -60,8 +60,9 @@ function UsageTrack() {
     }
   }
 
-  async function fetchSubscriptionStatus() {
+  async function fetchSubscriptionStatus(email:string) {
     try {
+      if (!email) return; // ✅ Ensure email is defined
       const result = await db
         .select()
         .from(UserSubscription)

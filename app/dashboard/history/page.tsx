@@ -31,7 +31,9 @@ function formatDate(dateStr: string) {
 async function History() {
   const user = await currentUser();
   const email = user?.primaryEmailAddress?.emailAddress;
-
+if (!email) {
+  return []; // or handle it however makes sense for your use case
+}
   const historyList: HISTORY[] = email
     ? await db
         .select()

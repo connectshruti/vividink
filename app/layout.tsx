@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "CreatorAI",
-  description: "AI Content Generator",
+  title: "VividInk",
+  description: "Cotnent Generation using AI",
 };
 
 export default function RootLayout({
